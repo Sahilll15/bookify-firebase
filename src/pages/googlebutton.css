@@ -1,0 +1,29 @@
+#google-signin-button {
+  
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border: none;
+    background-color: #4285F4;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  #google-signin-button img {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+  }
+  
+  #google-signin-button:hover {
+    background-color: #3367D6;
+  }
+  
+  #google-signin-button:focus {
+    outline: none;
+  }
+  
