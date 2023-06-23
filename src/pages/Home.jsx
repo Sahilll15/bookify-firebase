@@ -22,7 +22,7 @@ const Home = () => {
     <div className='container my-5' style={{display:'flex',flexDirection:'wrap'}}>
     
        {books.map((book)=>{
-        return (<BookCard key={book.id} id={book.id} {...book.data()}/>)
+        return (<BookCard btn={'Get Details'} link={`/book/view/${book.id}`}  key={book.id} id={book.id} {...book.data()}/>)
        })}
     </div>
   )

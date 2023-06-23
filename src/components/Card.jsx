@@ -22,10 +22,10 @@ const BookCard = (props) => {
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>
         <Card.Text>
-          This is Book title <strong>{props.name} </strong>and this is book is sold by {props.displayName} and this book costs  {props.price}Rs
+          This is Book title <strong>{props.name} </strong>and this is book is sold by {props.displayName} and this book costs {props.price} Rs
       
         </Card.Text>
-        <Button variant="primary" onClick={e=>navigate(`/book/view/${props.id}`)}>Get Details</Button>
+        <Button variant="primary" onClick={e=>navigate(props.link)}>{props.btn}</Button>
       </Card.Body>
     </Card>
 

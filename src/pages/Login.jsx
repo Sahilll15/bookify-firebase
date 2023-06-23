@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './googlebutton.css'
 import logo from './logo.png'
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 
 
@@ -99,7 +99,9 @@ const Login = () => {
     <button id="google-signin-button" onClick={handleGoogleSignIn}>
   <img src={logo} alt="Google Icon" />
   <span>Sign in with Google</span>
+ 
 </button>
+<span >Not an User? <NavLink to={'/register'} style={{textDecoration:"none"}}>register</NavLink></span>
 
     
 
