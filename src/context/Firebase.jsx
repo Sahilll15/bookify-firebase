@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 
 import {initializeApp} from 'firebase/app'
-import {getFirestore,getDoc,addDoc,collection} from 'firebase/firestore'
-import {getStorage,ref,uploadBytes} from 'firebase/storage'
+import {getFirestore,getDoc,addDoc,collection,getDocs,doc} from 'firebase/firestore'
+import {getStorage,ref,uploadBytes,getDownloadURL} from 'firebase/storage'
 
 import {getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup,onAuthStateChanged} from 'firebase/auth'
 
@@ -30,10 +30,6 @@ const firebaseApp=initializeApp(firebaseConfig);
 const auth=getAuth(firebaseApp);
 const firestore=getFirestore(firebaseApp);
 const storage=getStorage(firebaseApp);
-
-
-
-
 
 
 export const useFirebase=()=>useContext(FirebaseContext);
@@ -98,6 +94,10 @@ export const FirebaseProvider=(props)=>{
     const isLoggedin= user ? true : false;
 
 
+    const getImageUrl=(path)=>{
+        return getDownloadURL(ref(storage,path));
+    }
+
 
     const handleCreateNewListing= async (name,isbn,price,cover)=>{
         const imageRef=ref(storage,`uploads/images/${Date.now()}-${cover.name}`)
@@ -126,14 +126,25 @@ export const FirebaseProvider=(props)=>{
         }
         )
         
+    }
+
+    const listAllBooks = async()=>{
+        return getDocs(collection(firestore,"books"))
+
+    }
 
 
+    //get book by id
+    const getBookById= async (id)=>{
+        const docref=doc(firestore,'books',id);
+        const result=await getDoc(docref);
+        return result;
 
     }
     
 
     return(
-        <FirebaseContext.Provider value={{signupUserWithEmailandPassword,loginwithPasswordAndUsername,singInWithGoogle,isLoggedin,handleCreateNewListing}}>
+        <FirebaseContext.Provider value={{getBookById,signupUserWithEmailandPassword,getImageUrl, listAllBooks,loginwithPasswordAndUsername,singInWithGoogle,isLoggedin,handleCreateNewListing}}>
             {props.children}
         </FirebaseContext.Provider>
     )
